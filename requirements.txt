@@ -1,0 +1,10 @@
+spacy
+spacy-lookups-data
+fastapi
+uvicorn
+requests
+python-dotenv
+datasets
+pyarrow
+numpy
+scikit-learn
