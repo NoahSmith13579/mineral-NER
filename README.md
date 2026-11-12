@@ -1,8 +1,14 @@
-# Mineral NER & Question Answering
+# Mineral NER
 
 A machine learning project that uses **Named Entity Recognition (NER)** and **TF-IDF information retrieval** to identify mineral-related concepts and answer questions about mineral properties, classifications, and applications.
 
 The project uses [spaCy](https://spacy.io/) to train a custom NLP pipeline that recognizes mineral-related entities. It combines this model with a sentence retrieval system to identify relevant information from a mineral knowledge corpus and return context-based answers.
+
+## Frontend Availability
+
+**Important:** This repository contains the machine learning and backend components of the original chatbot project. The original frontend was developed using copyrighted material that I do not own or have permission to redistribute. Consequently, the frontend source code is not included in this repository.
+The backend was designed to communicate with the original frontend through a REST API.
+This repository focuses on demonstrating the NLP, named entity recognition, model training, and information retrieval components independently of the original frontend.
 
 ## Features
 
@@ -90,6 +96,7 @@ The extracted entities help narrow the search to information about the specified
 The retrieval system uses TF-IDF vectorization and cosine similarity to identify the most relevant sentence.
 
 The process:
+
 1. Filters the sentence corpus to articles matching the identified mineral.
 2. Extracts relevant entity terms from the question.
 3. Lemmatizes and normalizes the question and candidate sentences.
@@ -101,7 +108,7 @@ This approach provides answers grounded in the source corpus rather than generat
 
 ### 5. Backend Communication
 
-FastAPI hosts the chatbot backend and manages communication with the frontend.
+FastAPI hosts the chatbot backend and manages communication with the original frontend.
 
 The backend:
 - Loads the trained spaCy model.
@@ -109,6 +116,8 @@ The backend:
 - Retrieves questions from the frontend.
 - Processes questions using the chatbot response pipeline.
 - Returns answers to the frontend.
+
+The backend exposes REST API endpoints for frontend communication. The original frontend implementation is not included in this repository.
 
 ## Project Structure
 
@@ -151,8 +160,7 @@ Generated datasets, trained models, and external source data are maintained sepa
 - Python
 - pip
 - Git
-- The required mineral source dataset and preprocessing pipeline
-- The compatible chatbot frontend
+- Required mineral source dataset and preprocessing pipeline
 
 ### 1. Clone the Repository
 
@@ -170,7 +178,9 @@ pip install -r requirements.txt
 
 ### 3. Configure Environment Variables
 
-Create a `.env` file in the project root.
+Configure the required environment variables and data paths for your local environment.
+
+For example:
 
 ```env
 BASE_PATH=path/to/project/data
@@ -180,32 +190,22 @@ FASTAPI_HOST=0.0.0.0
 FASTAPI_PORT=8000
 ```
 
-Adjust the paths to match your local environment.
+Adjust the paths and settings to match your local environment.
 
 ### 4. Prepare the Source Data
 
-The application expects the following external resources:
+The application expects external resources, including:
 
 - Wikipedia article data in Parquet format under `Data/Wikipedia/`.
 - A preprocessed spaCy pipeline at `Data/Module-7/minerals_tokenized.pipeline`.
 
 These resources are required by the corpus generation process and are not included in the repository.
 
-### 5. Run the Application
+### 5. Running the Application
 
-Once the required data and frontend are available, execute:
+The FastAPI backend is designed to communicate with the original chatbot frontend. Since the frontend source code is not distributed with this repository, the complete original chatbot interface cannot be reproduced using this repository alone.
 
-```bash
-python main.py
-```
-
-The main application executes the following operations:
-
-1. Generates the mineral corpus and dataset splits.
-2. Runs hyperparameter experiments and selects the best-performing model.
-3. Starts the FastAPI backend.
-
-The backend runs on port `8000` by default and communicates with the frontend through its configured URL.
+The machine learning, NER, and sentence retrieval components can be examined independently of the frontend. Running the complete application requires the original frontend and its associated configuration.
 
 ## Limitations
 
@@ -214,6 +214,8 @@ The backend runs on port `8000` by default and communicates with the frontend th
 - TF-IDF retrieval depends on lexical similarity and may struggle with questions that use unfamiliar terminology or substantially different wording.
 - Responses are limited to information available in the sentence corpus.
 - The system does not use a generative large language model (LLM) to formulate answers.
+- The original chatbot frontend is not included because it contains copyrighted material that cannot be redistributed.
+- External datasets and trained model artifacts must be obtained or generated separately.
 
 ## Future Improvements
 
@@ -225,6 +227,7 @@ Potential areas for improvement include:
 - Improving semantic matching for questions that use synonyms or unfamiliar terminology.
 - Evaluating retrieval accuracy independently from NER performance.
 - Expanding the range of supported questions and mineral-related concepts.
+- Improving backend response handling and API documentation.
 
 ## Author
 
